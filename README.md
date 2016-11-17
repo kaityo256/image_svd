@@ -1,6 +1,6 @@
 [Japanese](README_ja.md)/ English
 
-# Singular-Value-Decomposition of Image
+# Low-rank approximation of Image with Singular-Value-Decomposition
 
 ## Summary
 
