@@ -31,7 +31,6 @@ def color(filename,rank):
     w = img.width
     h = img.height
     A = np.asarray(img)
-    rank = 10
     r = perform_svd(A[:,:,0],rank).reshape(w*h)
     g = perform_svd(A[:,:,1],rank).reshape(w*h)
     b = perform_svd(A[:,:,2],rank).reshape(w*h)
