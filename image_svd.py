@@ -30,29 +30,13 @@ def color(filename,rank):
     img = Image.open(filename)
     w = img.width
     h = img.height
-    data = img.getdata()
-    rdata = [data[i][0] for i in range(w*h)]
-    gdata = [data[i][1] for i in range(w*h)]
-    bdata = [data[i][2] for i in range(w*h)]
-
-    r = np.asarray(rdata)
-    g = np.asarray(gdata)
-    b = np.asarray(bdata)
-
-    r = r.reshape((w,h))
-    g = g.reshape((w,h))
-    b = b.reshape((w,h))
-
-    r = perform_svd(r,rank)
-    g = perform_svd(g,rank)
-    b = perform_svd(b,rank)
-
-    r = r.reshape(h*w)
-    g = g.reshape(h*w)
-    b = b.reshape(h*w)
-    
-    data = [[(r[x+y*w],g[x+y*w],b[x+y*w]) for x in range(w)] for y in range(h)]
-    img2 = Image.fromarray(np.uint8(data))
+    A = np.asarray(img)
+    rank = 10
+    r = perform_svd(A[:,:,0],rank).reshape(w*h)
+    g = perform_svd(A[:,:,1],rank).reshape(w*h)
+    b = perform_svd(A[:,:,2],rank).reshape(w*h)
+    B = np.asarray([r,g,b]).transpose(1,0).reshape(h,w,3)
+    img2 = Image.fromarray(np.uint8(B))
     file = path+'_r' + str(rank) + ext
     img2.save(file)
     print('Saved as ' + file)
@@ -75,5 +59,6 @@ def main():
     mono(filename,rank)
     color(filename,rank)
 
+
 if __name__ == '__main__':
-        main()
+    main()
