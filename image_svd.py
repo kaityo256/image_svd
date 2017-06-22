@@ -40,6 +40,29 @@ def color(filename,rank):
     img2.save(file)
     print('Saved as ' + file)
 
+def color_tucker(filename,rank):
+    path, ext = os.path.splitext(filename)
+    img = Image.open(filename)
+    w = img.width
+    h = img.height
+    X = np.asarray(img)
+    X1 =  X.transpose(0,2,1).reshape(h*3,w)
+    X2 = X.transpose(1,2,0).reshape(w*3,h)
+    U,s,A1 = linalg.svd(X1)
+    U,s,A2 = linalg.svd(X2)
+    r2 = int(rank*1.5)
+    a1 = A1[:r2, :]
+    a2 = A2[:r2, :]
+    pa1 =  np.tensordot(a1,a1.T,(0,1))
+    pa2 =  np.tensordot(a2,a2.T,(0,1))
+    X2 = np.tensordot(X,pa1,(1,0))
+    X3 = np.tensordot(X2,pa2,(0,0))
+    X4 = X3.transpose(2,1,0)
+    img2 = Image.fromarray(np.uint8(X4))
+    file = path+'_t' + str(rank) + ext
+    img2.save(file)
+    print('Saved as ' + file)
+
 def main():
     rank = 10
     argc = len(sys.argv)
@@ -57,6 +80,7 @@ def main():
 
     mono(filename,rank)
     color(filename,rank)
+    color_tucker(filename,rank)
 
 
 if __name__ == '__main__':
