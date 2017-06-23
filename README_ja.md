@@ -28,10 +28,16 @@ Saved as stop_r10.jpg
 
 ![stop.jpg](stop_mono.jpg)
 
-近似画像 (カラー, Rank=10)
-
-![stop_r10.jpg](stop_r10.jpg)
-
 近似画像 (白黒, Rank=10)
 
 ![stop_r10_mono.jpg](stop_r10_mono.jpg)
+
+近似画像 (カラー, Rank=10)
+RGBプレーンそれぞれを行列だと思ってSVDし、低ランク近似したものを合成。
+
+![stop_r10.jpg](stop_r10.jpg)
+
+近似画像 (カラー, Rank=30)
+画像を高さ、幅、色の3本の足をもつテンソルだと思ってHOSVDして、低ランク近似したもの。上画像と同じ自由度にするためにRankは3倍取ってある。
+
+![stop_t10.jpg](stop_t10.jpg)

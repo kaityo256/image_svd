@@ -28,10 +28,15 @@ Grayscale image (Converted from original image)
 
 ![stop.jpg](stop_mono.jpg)
 
-Approximated image (Color, Rank=10)
-
-![stop_r10.jpg](stop_r10.jpg)
 
 Approximated image (Grayscale, Rank=10)
 
 ![stop_r10_mono.jpg](stop_r10_mono.jpg)
+
+Approximated image (Color, Rank=10)
+
+![stop_r10.jpg](stop_r10.jpg)
+
+Approximated image (Color, HOSVD, Rank=30)
+
+![stop_r10.jpg](stop_t10.jpg)
